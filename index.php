@@ -1,3 +1,12 @@
+<?php
+
+include 'koneksi.php';
+
+$query = "SELECT * FROM produk";
+$eksekusi = mysqli_query($conn, $query);
+
+?>
+
 <!DOCTYPE html>
 <html
   lang="en"
@@ -43,36 +52,36 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                          <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
-                          </p>
+            <div class="table-responsive text-nowrap">
+                  <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Kode Produk</th>
+                        <th>Nama Produk</th>
+                        <th>Stok</th>
+                        <th>Harga</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <?php
+                      $no = 0;
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      while ($row = mysqli_fetch_array($eksekusi)) { 
+                        $no++; ?>
+                      <tr>
+                        <td><?= $no ?></td>
+                        <td><?= $row['kode_produk']?></td>
+                        <td><?= $row['nama_produk']?></td>
+                        <td><?= $row['stok']?></td>
+                        <td>Rp. <?= $row['harga']?></td>
+                      </tr>
+                      <?php
+                      }
+                      ?>
+                    </tbody>
+                  </table>
                 </div>
-              </div>
             </div>
             <!-- / Content -->
 
